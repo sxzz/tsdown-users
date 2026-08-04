@@ -15,6 +15,10 @@ const data = uniqBy(
   (item) => item.url,
 )
 
+if (data.length < 300) {
+  throw new Error(`Expected at least 300 dependents, but got ${data.length}`)
+}
+
 await writeFile(
   `./data/${new Date().toISOString().split('T', 1)[0]}.json`,
   `${JSON.stringify(data, null, 2)}\n`,
